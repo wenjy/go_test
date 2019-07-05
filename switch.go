@@ -6,6 +6,14 @@ import (
 	"time"
 )
 
+func shouldEscape(c byte) bool {
+	switch c {
+	case ' ', '?', '&', '=', '#', '+', '%':
+		return true
+	}
+	return false
+}
+
 func main() {
 	fmt.Print("Go runs on ")
 	switch os := runtime.GOOS; os {
@@ -33,6 +41,7 @@ func main() {
 		fmt.Println("Too far away.")
 	}
 
+	// like if else
 	t := time.Now()
 	switch {
 	case t.Hour() < 12:
@@ -42,4 +51,6 @@ func main() {
 	default:
 		fmt.Println("Good evening.")
 	}
+
+	fmt.Println(shouldEscape('?'))
 }
