@@ -32,4 +32,13 @@ func main() {
 	fmt.Printf("%s %s\n", a, b)
 	fmt.Println(split(11))
 	fmt.Println(php, c, i, d, f, e)
+
+	fmt.Println(f1(f2()))
+}
+func f1(a, b int) int {
+	return a + b
+}
+
+func f2() (a, b int) {
+	return 1,2
 }
