@@ -33,8 +33,11 @@ func main() {
 	fmt.Println(split(11))
 	fmt.Println(php, c, i, d, f, e)
 
+	// 函数可以将其他函数调用作为它的参数，
+	// 只要这个被调用函数的返回值个数、返回值类型和返回值的顺序与调用函数所需求的实参是一致的
 	fmt.Println(f1(f2()))
 }
+
 func f1(a, b int) int {
 	return a + b
 }

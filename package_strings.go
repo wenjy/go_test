@@ -42,6 +42,8 @@ func main() {
 	repeat_str := strings.Repeat("a", 5)
 	fmt.Println(repeat_str)
 
+	// 大小写转换
 	fmt.Println(strings.ToLower(str))
 	fmt.Println(strings.ToUpper(str))
+
 }

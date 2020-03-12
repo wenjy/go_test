@@ -13,6 +13,7 @@ func sqrt(x float64) string {
 }
 
 func pow(x, n, lim float64) float64 {
+	// f 可以包含一个初始化语句
 	if v := math.Pow(x, n); v < lim {
 		return v
 	} else {

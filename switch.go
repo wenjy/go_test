@@ -54,6 +54,7 @@ func main() {
 
 	fmt.Println(shouldEscape('?'))
 
+	// 默认break
 	i := 0
 	switch i {
 		case 0: fallthrough
