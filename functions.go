@@ -14,6 +14,7 @@ func swap(x, y string) (string, string) {
 	return y, x
 }
 
+// 返回指定了参数，return时不需要再指定，不推荐使用
 func split(sum int) (x, y int) {
 	x = sum * 4 / 9
 	y = sum - x
@@ -36,6 +37,9 @@ func main() {
 	// 函数可以将其他函数调用作为它的参数，
 	// 只要这个被调用函数的返回值个数、返回值类型和返回值的顺序与调用函数所需求的实参是一致的
 	fmt.Println(f1(f2()))
+
+	f,_,sum := f3(1, 2)
+	fmt.Println(f,sum)
 }
 
 func f1(a, b int) int {
@@ -44,4 +48,8 @@ func f1(a, b int) int {
 
 func f2() (a, b int) {
 	return 1,2
+}
+
+func f3(a, b int) (int, int, int) {
+	return a, b, a + b
 }
