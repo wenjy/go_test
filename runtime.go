@@ -17,4 +17,7 @@ func main()  {
 	fmt.Println(2)
 	where()
 
+	var m runtime.MemStats
+	runtime.ReadMemStats(&m)
+	fmt.Printf("%d Kb\n", m.Alloc / 1024)
 }
