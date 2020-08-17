@@ -1,29 +1,29 @@
 package main
 
 import (
-    "fmt"
+	"fmt"
 )
 
 type Camera struct{}
 
 func (c *Camera) TakeAPicture() string {
-    return "Click"
+	return "Click"
 }
 
 type Phone struct{}
 
 func (p *Phone) Call() string {
-    return "Ring Ring"
+	return "Ring Ring"
 }
 
 type CameraPhone struct {
-    Camera
-    Phone
+	Camera
+	Phone
 }
 
 func main() {
-    cp := new(CameraPhone)
-    fmt.Println("Our new CameraPhone exhibits multiple behaviors...")
-    fmt.Println("It exhibits behavior of a Camera: ", cp.TakeAPicture())
-    fmt.Println("It works like a Phone too: ", cp.Call())
+	cp := new(CameraPhone)
+	fmt.Println("Our new CameraPhone exhibits multiple behaviors...")
+	fmt.Println("It exhibits behavior of a Camera: ", cp.TakeAPicture())
+	fmt.Println("It works like a Phone too: ", cp.Call())
 }

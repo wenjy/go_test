@@ -10,9 +10,9 @@ import (
 var host = flag.String("host", "172.16.1.49", "host")
 var port = flag.String("port", "9999", "port")
 
-func main()  {
+func main() {
 	conn, err := net.Dial("tcp", *host+":"+*port)
-	fmt.Println(*host+":"+*port)
+	fmt.Println(*host + ":" + *port)
 	if err != nil {
 		fmt.Println("err1")
 		os.Exit(1)

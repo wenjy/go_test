@@ -1,20 +1,21 @@
 package main
+
 import (
-    "fmt"
+	"fmt"
 )
 
 var (
-    barVal = map[string]int{"alpha": 34, "bravo": 56, "charlie": 23,
-                            "delta": 87, "echo": 56, "foxtrot": 12}
+	barVal = map[string]int{"alpha": 34, "bravo": 56, "charlie": 23,
+		"delta": 87, "echo": 56, "foxtrot": 12}
 )
 
 func main() {
-    invMap := make(map[int]string, len(barVal))
-    for k, v := range barVal {
-        invMap[v] = k
-    }
-    fmt.Println("inverted:")
-    for k, v := range invMap {
-        fmt.Println(k, v)
-    }
+	invMap := make(map[int]string, len(barVal))
+	for k, v := range barVal {
+		invMap[v] = k
+	}
+	fmt.Println("inverted:")
+	for k, v := range invMap {
+		fmt.Println(k, v)
+	}
 }

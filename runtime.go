@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"runtime"
 	"log"
+	"runtime"
 )
 
-func main()  {
+func main() {
 	where := func() {
 		_, file, line, _ := runtime.Caller(1)
 		log.Printf("%s:%d", file, line)
@@ -19,5 +19,5 @@ func main()  {
 
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
-	fmt.Printf("%d Kb\n", m.Alloc / 1024)
+	fmt.Printf("%d Kb\n", m.Alloc/1024)
 }

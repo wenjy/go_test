@@ -38,8 +38,8 @@ func main() {
 	// 只要这个被调用函数的返回值个数、返回值类型和返回值的顺序与调用函数所需求的实参是一致的
 	fmt.Println(f1(f2()))
 
-	f,_,sum := f3(1, 2)
-	fmt.Println(f,sum)
+	f, _, sum := f3(1, 2)
+	fmt.Println(f, sum)
 }
 
 func f1(a, b int) int {
@@ -47,7 +47,7 @@ func f1(a, b int) int {
 }
 
 func f2() (a, b int) {
-	return 1,2
+	return 1, 2
 }
 
 func f3(a, b int) (int, int, int) {

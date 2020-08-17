@@ -1,24 +1,25 @@
 package main
+
 import (
-    "fmt"
-    "math/rand"
-    "time"
+	"fmt"
+	"math/rand"
+	"time"
 )
 
 func main() {
-    for i := 0; i < 2; i++ {
-        a := rand.Int() 
-        fmt.Printf("%d / ", a)
+	for i := 0; i < 2; i++ {
+		a := rand.Int()
+		fmt.Printf("%d / ", a)
 	}
 	fmt.Println()
-    for i := 0; i < 3; i++ {
-        r := rand.Intn(8) // 返回介于 [0, n) 之间的伪随机数
-        fmt.Printf("%d / ", r)
-    }
-    fmt.Println()
-    timens := int64(time.Now().Nanosecond())
-    rand.Seed(timens)
-    for i := 0; i < 4; i++ {
-        fmt.Printf("%2.2f / ", 100*rand.Float32())
-    }
+	for i := 0; i < 3; i++ {
+		r := rand.Intn(8) // 返回介于 [0, n) 之间的伪随机数
+		fmt.Printf("%d / ", r)
+	}
+	fmt.Println()
+	timens := int64(time.Now().Nanosecond())
+	rand.Seed(timens)
+	for i := 0; i < 4; i++ {
+		fmt.Printf("%2.2f / ", 100*rand.Float32())
+	}
 }

@@ -17,7 +17,7 @@ func main() {
 	fmt.Println(sum)
 
 	sum1 := 1
-	for ; sum1 < 10; {
+	for sum1 < 10 {
 		sum1 += sum1
 	}
 	fmt.Println(sum1)
@@ -46,11 +46,11 @@ func main() {
 
 	// for string
 	forStr := "我是开发者"
-	for pos,char := range forStr {
+	for pos, char := range forStr {
 		fmt.Printf("character %#U starts at byte position %d\n", char, pos)
 	}
 
-	forArr := []int{1,2,3,4}
+	forArr := []int{1, 2, 3, 4}
 
 	// Reverse a
 	for i, j := 0, len(forArr)-1; i < j; i, j = i+1, j-1 {

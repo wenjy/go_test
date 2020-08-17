@@ -1,8 +1,8 @@
 package main
 
 import (
-	"time"
 	"fmt"
+	"time"
 )
 
 type MyError struct {
@@ -32,7 +32,7 @@ func run() error {
 }
 
 func Sqrt(x float64) (float64, error) {
-	return x,ErrNegativeSqrt(x)
+	return x, ErrNegativeSqrt(x)
 }
 
 func main() {
@@ -43,4 +43,3 @@ func main() {
 	fmt.Println(Sqrt(2))
 	fmt.Println(Sqrt(-2))
 }
-

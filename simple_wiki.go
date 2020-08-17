@@ -1,163 +1,162 @@
 package main
 
 import (
-    "net/http"
-    "io/ioutil"
-    "log"
-    "regexp"
-    "text/template"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"regexp"
+	"text/template"
 )
 
 const lenPath = len("/view/")
 
 // 正则表达式来检查标题
 var titleValidator = regexp.MustCompile("^[a-zA-Z0-9]+$")
+
 // 模板缓存
 var templates = make(map[string]*template.Template)
 
 var err error
 
 type Page struct {
+	Title string
 
-    Title string
-
-    Body []byte
-
+	Body []byte
 }
 
 func init() {
 
-    for _, tmpl := range []string{"edit", "view"} {
+	for _, tmpl := range []string{"edit", "view"} {
 
-        templates[tmpl] = template.Must(template.ParseFiles(tmpl + ".html"))
+		templates[tmpl] = template.Must(template.ParseFiles(tmpl + ".html"))
 
-    }
+	}
 
 }
 
 func main() {
 
-    http.HandleFunc("/view/", makeHandler(viewHandler))
+	http.HandleFunc("/view/", makeHandler(viewHandler))
 
-    http.HandleFunc("/edit/", makeHandler(editHandler))
+	http.HandleFunc("/edit/", makeHandler(editHandler))
 
-    http.HandleFunc("/save/", makeHandler(saveHandler))
+	http.HandleFunc("/save/", makeHandler(saveHandler))
 
-    err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8080", nil)
 
-    if err != nil {
+	if err != nil {
 
-        log.Fatal("ListenAndServe: ", err.Error())
+		log.Fatal("ListenAndServe: ", err.Error())
 
-    }
+	}
 
 }
 
 func makeHandler(fn func(http.ResponseWriter, *http.Request, string)) http.HandlerFunc {
 
-    return func(w http.ResponseWriter, r *http.Request) {
-        title := r.URL.Path[lenPath:]
+	return func(w http.ResponseWriter, r *http.Request) {
+		title := r.URL.Path[lenPath:]
 
-        if !titleValidator.MatchString(title) {
+		if !titleValidator.MatchString(title) {
 
-            http.NotFound(w, r)
+			http.NotFound(w, r)
 
-            return
+			return
 
-        }
+		}
 
-        fn(w, r, title)
+		fn(w, r, title)
 
-    }
+	}
 
 }
 
 func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 
-    p, err := load(title)
+	p, err := load(title)
 
-    if err != nil {
+	if err != nil {
 
-        // 找不到页面
+		// 找不到页面
 
-        http.Redirect(w, r, "/edit/" + title, http.StatusFound)
+		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
 
-        return
+		return
 
-    }
+	}
 
-    renderTemplate(w, "view", p)
+	renderTemplate(w, "view", p)
 
 }
 
 func editHandler(w http.ResponseWriter, r *http.Request, title string) {
 
-    p, err := load(title)
+	p, err := load(title)
 
-    if err != nil {
+	if err != nil {
 
-        p = &Page{Title: title}
+		p = &Page{Title: title}
 
-    }
+	}
 
-    renderTemplate(w, "edit", p)
+	renderTemplate(w, "edit", p)
 
 }
 
 func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 
-    body := r.FormValue("body")
+	body := r.FormValue("body")
 
-    p := &Page{Title: title, Body: []byte(body)}
+	p := &Page{Title: title, Body: []byte(body)}
 
-    err := p.save()
+	err := p.save()
 
-    if err != nil {
+	if err != nil {
 
-        http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 
-        return
+		return
 
-    }
+	}
 
-    http.Redirect(w, r, "/view/" + title, http.StatusFound)
+	http.Redirect(w, r, "/view/"+title, http.StatusFound)
 
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 
-    err := templates[tmpl].Execute(w, p)
+	err := templates[tmpl].Execute(w, p)
 
-    if err != nil {
+	if err != nil {
 
-        http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 
-    }
+	}
 
 }
 
 func (p *Page) save() error {
 
-    filename := p.Title + ".test"
+	filename := p.Title + ".test"
 
-    // 创建一个只有当前用户拥有读写权限的文件
+	// 创建一个只有当前用户拥有读写权限的文件
 
-    return ioutil.WriteFile(filename, p.Body, 0600)
+	return ioutil.WriteFile(filename, p.Body, 0600)
 
 }
 
 func load(title string) (*Page, error) {
 
-    filename := title + ".test"
+	filename := title + ".test"
 
-    body, err := ioutil.ReadFile(filename)
+	body, err := ioutil.ReadFile(filename)
 
-    if err != nil {
+	if err != nil {
 
-        return nil, err
+		return nil, err
 
-    }
+	}
 
-    return &Page{Title: title, Body: body}, nil
+	return &Page{Title: title, Body: body}, nil
 
 }

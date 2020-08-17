@@ -1,8 +1,8 @@
 package main
 
 import (
-	"image"
 	"fmt"
+	"image"
 )
 
 func main() {

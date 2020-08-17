@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-func main()  {
-	fmt.Printf("Now you have %g problems.\n", math.Nextafter(2,3))
+func main() {
+	fmt.Printf("Now you have %g problems.\n", math.Nextafter(2, 3))
 	fmt.Println(math.Pi)
 }

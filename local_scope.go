@@ -3,9 +3,9 @@ package main
 var a = "G"
 
 func main() {
-   n()
-   m()
-   n()
+	n()
+	m()
+	n()
 }
 
 func n() {
@@ -13,8 +13,8 @@ func n() {
 }
 
 func m() {
-   a := "O" // 局部初始化变量并赋值
-   print(a)
+	a := "O" // 局部初始化变量并赋值
+	print(a)
 }
 
 // GOG

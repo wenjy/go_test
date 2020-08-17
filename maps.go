@@ -26,7 +26,6 @@ var m2 = map[string]Vertex{
 	"Google":    {37.42202, -122.08408},
 }
 
-
 func main() {
 	m = make(map[string]Vertex)
 	m["Bell Labs"] = Vertex{
@@ -53,9 +52,8 @@ func main() {
 	// 如果 key 在 m 中，`ok` 为 true 。否则， ok 为 `false`，并且 elem 是 map 的元素类型的零值。
 	v, ok := m3["Answer"]
 	fmt.Println("The value:", v, "Present?", ok)
-	m3["abc"] = 1;
+	m3["abc"] = 1
 	if _, ok := m3["abc"]; ok {
 		fmt.Println("key abc in m3")
 	}
 }
-

@@ -27,7 +27,7 @@ func main() {
 
 	// 写入文件
 	currentDir := GetCurrentDirectory()
-	file,err1 := os.Create(currentDir + "/file")
+	file, err1 := os.Create(currentDir + "/file")
 	if err1 != nil {
 		fmt.Println(err1)
 	}
@@ -50,7 +50,6 @@ func main() {
 	}
 	fmt.Printf("fileStr:%s\n", fileStr)
 }
-
 
 // Contents returns the file's contents as a string.
 func Contents(filename string) (string, error) {

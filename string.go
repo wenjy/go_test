@@ -1,7 +1,8 @@
 package main
+
 import "fmt"
 
-func main()  {
+func main() {
 	str1 := "aaa\n"
 	fmt.Println(str1)
 	str2 := `aaa\n`
