@@ -20,6 +20,7 @@ func main() {
 	fmt.Printf("two1 is: %#v\n", two1)
 }
 
+// 不要在 String() 方法里面调用涉及 String() 方法的方法
 func (tn *TwoInts) String() string {
 	return "(" + strconv.Itoa(tn.a) + "/" + strconv.Itoa(tn.b) + ")"
 }
