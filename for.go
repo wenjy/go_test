@@ -10,6 +10,29 @@ var forMap = map[string]int{
 }
 
 func main() {
+	//var a = []byte{1, 2, 3, 4, 5, 6}
+	//fmt.Println(a[0:5])
+	fmt.Println(len([]byte{}))
+	var splitLen = 16352
+	var dataLen = 16352*3 + 1
+
+	var end = 0
+
+	stop := false
+	for start := 0; start < dataLen; start += splitLen {
+		if stop {
+			break
+		}
+		end += splitLen
+		if end > dataLen {
+			end = dataLen
+			stop = true
+		}
+
+		fmt.Println(start, end)
+	}
+
+	return
 	sum := 0
 	for i := 0; i < 5; i++ {
 		sum += i
