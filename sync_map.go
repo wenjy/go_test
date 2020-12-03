@@ -33,19 +33,54 @@ func (ts *TestService) Set(id int) {
 	ts.TestMap.Store(id, &TestVal{id})
 }
 
-func (ts *TestService) Incr(key, num int) {
-	if testVal := ts.Get(key); testVal != nil {
-		testVal.ID += num
+func (ts *TestService) Pull(key int) *TestVal {
+	if v, ok := ts.TestMap.LoadAndDelete(key); ok {
+		return v.(*TestVal)
 	}
+	return nil
+}
+
+func (ts *TestService) Put(id int) *TestVal {
+	if v, ok := ts.TestMap.LoadOrStore(id, &TestVal{id}); ok {
+		return v.(*TestVal)
+	}
+	return nil
+}
+
+func (ts *TestService) Del(id int) {
+	ts.TestMap.Delete(id)
 }
 
 func main() {
 	testService := newTestService()
-	id := 1
-	testService.Set(id)
-	val := testService.Get(id)
+	testService.Set(1)
 
-	fmt.Println(val.ID)
-	testService.Incr(id, 2)
-	fmt.Println(val.ID)
+	val1 := testService.Get(1)
+	fmt.Println(val1)
+
+	val2 := testService.Pull(1)
+	fmt.Println(val2)
+
+	val3 := testService.Get(1)
+	fmt.Println(val3)
+
+	val4 := testService.Put(4) // 原来没有
+	fmt.Println(val4)
+	val5 := testService.Get(4)
+	fmt.Println(val5)
+
+	testService.Del(4)
+	val6 := testService.Get(4)
+	fmt.Println(val6)
+
+	testService.Set(5)
+	testService.Set(6)
+	testService.Set(7)
+	testMap.Range(func(k, v interface{}) bool {
+		fmt.Println(k, v)
+		if k == 6 {
+			return false
+		}
+		return true
+	})
 }
