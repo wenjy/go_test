@@ -27,6 +27,15 @@ func main() {
 	fmt.Println(ioutil.ReadAll(request.Body))
 	fmt.Println(err)
 
+	reqStrConnect := "CONNECT www.baidu.com:443 HTTP/1.1\r\nHost: www.baidu.com:443\r\nProxy-Connection: keep-alive\r\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36\r\nContent-Length: 9\r\n\r\ntest-body"
+	r2 := strings.NewReader(reqStrConnect)
+	lr2 := io.LimitReader(r2, int64(len(reqStrConnect)))
+	br2 := bufio.NewReader(lr2)
+	request2, err := http.ReadRequest(br2)
+
+	fmt.Println(request2)
+	fmt.Println(ioutil.ReadAll(request2.Body))
+
 	res := "HTTP/1.1 200\r\nServer: SwooleServer\r\nContent-Type: text/html;charset=utf8\r\nContent-Length: 9\r\n\r\ntest-body"
 	index = strings.Index(res, "\r\n\r\n")
 	fmt.Println(index)
