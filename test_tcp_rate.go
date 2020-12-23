@@ -12,7 +12,12 @@ import (
 var limiter *rate.Limiter
 
 func main() {
-	limiter = rate.NewLimiter(1024*128, 1024*128)
+	// 128kb/s 1024*128
+	// limiter = rate.NewLimiter(1024*128, 1024*128) // 每秒
+	speedLimit := 128
+	limit := speedLimit * 1024
+	limiter = rate.NewLimiter(rate.Every(time.Second/time.Duration(limit)), limit) // 每纳秒
+
 	ln, err := net.Listen("tcp", "127.0.0.1:8082")
 	if err != nil {
 		// handle error

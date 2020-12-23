@@ -61,4 +61,15 @@ func main() {
 		time.Sleep(r.Delay())
 		fmt.Println("ReserveN act")
 	}
+
+
+	// 重新设置速度
+	limiter.SetLimit(1)
+	fmt.Println(time.Now().Unix())
+	// 这里要10s
+	err = limiter.WaitN(context.Background(), 10)
+	if err != nil {
+		fmt.Println("WaitN err", err)
+	}
+	fmt.Println(time.Now().Unix())
 }

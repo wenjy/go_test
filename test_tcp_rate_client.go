@@ -9,8 +9,6 @@ import (
 func main() {
 	conn, err := net.Dial("tcp", "127.0.0.1:8082")
 
-	/* raddr := net.TCPAddr{IP: net.ParseIP("127.0.0.1"), Port: 8081}
-	conn, err := net.DialTCP("tcp", nil, &raddr) */
 	if err != nil {
 		// handle error
 		fmt.Println(err)

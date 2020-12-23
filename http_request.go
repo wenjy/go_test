@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	reqStr := "GET / HTTP/1.1\r\nHost: www.baidu.com\r\nContent-LengthProxy-Connection: keep-alive\r\nAccept: */*\r\nUser-Agent: Mozilla/5.0\r\n\r\ntest-body"
+	reqStr := "GET / HTTP/1.1\r\nHost: www.baidu.com\r\nProxy-Connection: keep-alive\r\nAccept: */*\r\nUser-Agent: Mozilla/5.0\r\nContent-Length: 9\r\n\r\ntest-body"
 
 	index := strings.Index(reqStr, "\r\n\r\n")
 	fmt.Println(index)
