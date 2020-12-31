@@ -11,7 +11,7 @@ func main() {
 		}
 		fmt.Println("e")
 	}()
-	f() //开始调用f
+	f()              //开始调用f
 	fmt.Println("f") //这里开始下面代码不会再执行
 }
 
@@ -20,6 +20,7 @@ func f() {
 	panic("异常信息")
 	fmt.Println("b") //这里开始下面代码不会再执行
 }
+
 /*
 -------output-------
 c

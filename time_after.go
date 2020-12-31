@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"time"
 )
 
@@ -10,10 +11,16 @@ var c chan int
 //func handle(int) {}
 
 func main() {
-	select {
-	case <-c:
+	go func() {
+		timeCh := time.After(3 * time.Second)
+		fmt.Println("NumGoroutine", runtime.NumGoroutine())
+		select {
+		case <-c:
 
-	case <-time.After(3 * time.Second):
-		fmt.Println("timed out")
-	}
+		case <-timeCh:
+			fmt.Println("timed out")
+		}
+	}()
+	fmt.Println("NumGoroutine", runtime.NumGoroutine())
+	time.Sleep(time.Second * 4)
 }

@@ -27,16 +27,19 @@ func main() {
 	fmt.Println(ioutil.ReadAll(request.Body))
 	fmt.Println(err)
 
-	reqStrConnect := "CONNECT www.baidu.com:443 HTTP/1.1\r\nHost: www.baidu.com:443\r\nProxy-Connection: keep-alive\r\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36\r\nContent-Length: 9\r\n\r\ntest-body"
+	reqStrConnect := "CONNECT www.baidu.com:443 HTTP/1.1\r\nHost: www.baidu.com:443\r\nProxy-Connection: keep-alive\r\nConnection: keep-alive\r\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36\r\n\r\n"
+	reqStrConnect = "CONNECT 2021.ip138.com:443 HTTP/1.1\r\nHost: 2021.ip138.com:443\r\nProxy-Connection: keep-alive\r\nConnection: keep-alive\r\nUser-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36\r\n\r\n"
 	r2 := strings.NewReader(reqStrConnect)
 	lr2 := io.LimitReader(r2, int64(len(reqStrConnect)))
 	br2 := bufio.NewReader(lr2)
 	request2, err := http.ReadRequest(br2)
 
+	request2.Header.Set("Connection", "Close")
 	fmt.Println(request2)
+	fmt.Println(request2.Host)
 	fmt.Println(ioutil.ReadAll(request2.Body))
 
-	res := "HTTP/1.1 200\r\nServer: SwooleServer\r\nContent-Type: text/html;charset=utf8\r\nContent-Length: 9\r\n\r\ntest-body"
+	res := "HTTP/1.1 200\r\nServer: SwooleServer\r\nContent-Type: text/html;charset=utf8\r\nContent-Length: 10\r\n\r\ntest-body"
 	index = strings.Index(res, "\r\n\r\n")
 	fmt.Println(index)
 	fmt.Println(string([]byte(res)[index+4:]))
@@ -44,10 +47,10 @@ func main() {
 	r1 := bytes.NewReader([]byte(res))
 	lr = io.LimitReader(r1, int64(len(res)))
 	br = bufio.NewReader(lr)
-	response, err := http.ReadResponse(br, request)
+	response, err := http.ReadResponse(br, &http.Request{})
 
-	fmt.Println(response)
-	body, _ := ioutil.ReadAll(response.Body)
+	fmt.Println("response", response)
+	body, err := ioutil.ReadAll(response.Body)
 	fmt.Println(string(body))
 	fmt.Println(err)
 }

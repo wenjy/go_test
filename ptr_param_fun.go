@@ -15,6 +15,12 @@ func main() {
 	fmt.Println(fmt.Sprintf("%p", a))
 	f1(a)
 	f2(a)
+
+	var ptr *Aa
+	fmt.Println(fmt.Sprintf("%p", ptr))
+	ptr = f3()
+	fmt.Println(fmt.Sprintf("%p", ptr))
+	//fmt.Println(ptr.Data)
 }
 
 func f1(a *Aa) {
@@ -23,4 +29,10 @@ func f1(a *Aa) {
 
 func f2(a *Aa) {
 	fmt.Println(fmt.Sprintf("%p", a))
+}
+
+func f3() *Aa {
+	a := &Aa{Data: 3}
+	fmt.Println(fmt.Sprintf("%p", a))
+	return a
 }
