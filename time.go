@@ -32,4 +32,10 @@ func main() {
 
 	time_unix_nano := time.Now().UnixNano()
 	fmt.Println(time_unix_nano) // 1583936145248957000
+
+	start := time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)
+	end := time.Date(2000, 1, 1, 12, 0, 0, 0, time.UTC)
+
+	difference := end.Sub(start)
+	fmt.Printf("difference = %v\n", difference) // 12h
 }

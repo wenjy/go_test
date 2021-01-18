@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"runtime"
+	"sync"
+	"sync/atomic"
 	"time"
 	"unsafe"
 )
@@ -33,8 +36,34 @@ func RandStringBytesMaskImpr(n int) string {
 	return *(*string)(unsafe.Pointer(&b))
 }
 
+var num = 100000
+var cache = make(map[string]bool, num)
+var mutex = sync.Mutex{}
+
+var runNum uint32
+
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	fmt.Println(RandStringBytesMaskImpr(32))
-	fmt.Println(RandStringBytesMaskImpr(32))
+	runtime.GOMAXPROCS(4)
+
+	var i int
+	for i = 0; i < num; i++ {
+		go addCache()
+	}
+
+	time.Sleep(time.Second * 1)
+	fmt.Println(runNum)
+}
+
+func addCache() {
+	str := RandStringBytesMaskImpr(32)
+
+	mutex.Lock()
+	defer mutex.Unlock()
+	if _, ok := cache[str]; ok {
+		fmt.Println(str)
+		return
+	}
+	cache[str] = true
+	atomic.AddUint32(&runNum, 1)
 }

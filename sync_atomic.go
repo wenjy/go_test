@@ -5,6 +5,10 @@ import (
 	"sync/atomic"
 )
 
+type TestAtomic struct {
+	a int32
+}
+
 func main() {
 	var a int32 = 0
 	var b int32 = 0
@@ -47,6 +51,11 @@ func main() {
 	ac1 := readOnly.Load().(*atomicValue)
 	fmt.Println("atomicValue", ac1)
 
+	t := &TestAtomic{}
+
+	ta := atomic.AddInt32(&t.a, int32(1))
+	fmt.Println("TestAtomic.a", ta)
+	fmt.Println("TestAtomic.a", t.a)
 }
 
 type atomicValue struct {
