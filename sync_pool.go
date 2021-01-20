@@ -18,6 +18,14 @@ var bufPool = sync.Pool{
 	},
 }
 
+var ptrBufPool = sync.Pool{
+	New: func() interface{} {
+		buf := make([]byte, 10)
+		fmt.Printf("ptrBuf->%p\n", buf)
+		return buf
+	},
+}
+
 // timeNow is a fake version of time.Now for tests.
 func timeNow() time.Time {
 	return time.Unix(1136214245, 0)
@@ -46,6 +54,23 @@ var byteBufPool = sync.Pool{
 // 保存和复用临时对象，减少内存分配，降低GC压力
 // 没有就new一个新的，有就直接拿，使用完在put回去
 func main() {
+	/* ptrBuf := ptrBufPool.Get().(*[]byte)
+	fmt.Printf("ptrBuf->%p\n", *ptrBuf)
+
+	ptrBuf1 := (*ptrBuf)[:1]
+	ptrBuf2 := (*ptrBuf)[:2]
+	fmt.Printf("ptrBuf->%p\n", ptrBuf1)
+	fmt.Printf("ptrBuf->%p\n", ptrBuf2) */
+
+	ptrBuf := ptrBufPool.Get().([]byte)
+	fmt.Printf("ptrBuf->%p\n", ptrBuf)
+
+	ptrBuf1 := ptrBuf[:1]
+	ptrBuf2 := ptrBuf[:2]
+	fmt.Printf("ptrBuf->%p\n", ptrBuf1)
+	fmt.Printf("ptrBuf->%p\n", ptrBuf2)
+	return
+
 	Log(os.Stdout, "path", "/search?q=flowers")
 
 	buf := byteBufPool.Get().([]byte)
