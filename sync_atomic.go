@@ -16,6 +16,11 @@ func main() {
 	newA := atomic.AddInt32(&a, int32(1))
 	fmt.Println("AddInt32 new", newA)
 
+	// 测试溢出，重新计数
+	var aa uint32 = 1<<32 - 1
+	newAa := atomic.AddUint32(&aa, uint32(2))
+	fmt.Println("AddUint32 newAa", newAa)
+
 	newA = atomic.AddInt32(&a, int32(-1))
 	fmt.Println("AddInt32 new", newA)
 
