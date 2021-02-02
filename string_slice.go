@@ -11,4 +11,8 @@ func main() {
 	s2 := string(c) // s2 == "cello"
 
 	fmt.Println(s2)
+
+	// 字符串直接切
+	s3 := "aaaaa"
+	fmt.Println(s3[:2])
 }
