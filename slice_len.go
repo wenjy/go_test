@@ -15,7 +15,14 @@ func main() {
 	fmt.Println("s3 cap", cap(s3)) // 10
 	fmt.Println("s3 len", len(s3)) // 3
 
+	s4 := s1[10:]
+	fmt.Println("s4 cap", cap(s4)) // 0
+	fmt.Println("s4 len", len(s4)) // 0
+
 	copy(s2, []byte{97, 98, 99})
 	fmt.Println("s1[0]", s1[0])
 	fmt.Println("s2[0]", s2[0])
+
+	var s5 []byte
+	fmt.Println("s5 len", len(s5))
 }
