@@ -76,9 +76,13 @@ func main() {
 	testService.Set(5)
 	testService.Set(6)
 	testService.Set(7)
+	testService.Set(8)
 	testMap.Range(func(k, v interface{}) bool {
 		fmt.Println(k, v)
-		if k == 6 {
+		if k == 5 {
+			testMap.Delete(5)
+		}
+		if k == 7 {
 			return false
 		}
 		return true
