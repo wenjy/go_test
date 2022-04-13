@@ -19,6 +19,10 @@ func main() {
 	fmt.Println("s4 cap", cap(s4)) // 0
 	fmt.Println("s4 len", len(s4)) // 0
 
+	s6 := s1[:0]
+	fmt.Println("s6 cap", cap(s6)) // 10
+	fmt.Println("s6 len", len(s6)) // 0
+
 	copy(s2, []byte{97, 98, 99})
 	fmt.Println("s1[0]", s1[0])
 	fmt.Println("s2[0]", s2[0])

@@ -9,7 +9,8 @@ var week time.Duration
 
 func main() {
 	t := time.Now()
-	fmt.Println(t) // e.g. Wed Dec 21 09:52:14 +0100 RST 2011
+	fmt.Println(t)                               // e.g. Wed Dec 21 09:52:14 +0100 RST 2011
+	fmt.Println(t.Format("2006-01-02 15:04:05")) // Y-m-d H:i:s
 	fmt.Printf("%02d.%02d.%4d\n", t.Day(), t.Month(), t.Year())
 	// 21.12.2011
 	t = time.Now().UTC()
