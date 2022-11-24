@@ -164,6 +164,7 @@ func beforeStart() {
 	}
 }
 
+// 信号
 func signalHandler() {
 	signal.Notify(signalChan, syscall.SIGUSR2)
 	for {
@@ -177,6 +178,7 @@ func signalHandler() {
 	}
 }
 
+// 重启
 func gracefulExit() {
 	var connWait sync.WaitGroup
 	// 删除原来的
@@ -202,7 +204,7 @@ func gracefulExit() {
 		defer func() {
 			_ = unixConn.Close()
 		}()
-		// 所有连接发送到 sock
+		// 所有连接发送到 unix sock
 		connFiles.Range(func(key, value interface{}) bool {
 			if key == nil || value == nil {
 				return false

@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"./sort"
+	"go_test/sort"
 )
 
 func ints() {

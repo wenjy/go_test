@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"./trans"
+	"go_test/trans"
 )
 
 func main() {

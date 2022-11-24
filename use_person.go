@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"./person"
+	"go_test/person"
 )
 
 func main() {
